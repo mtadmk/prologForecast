@@ -1,70 +1,93 @@
-:- module(fc,[
+:- module(fc,[ 
 		
 	]).
 
 start :-
-	write('Prognozowanie pogody.'),nl,nl,
+	write('Prognozowanie pogody.'), nl, nl,
 	wykasujZapamietaneOdpowiedzi,
    	szukajUbioru.
    	
 szukajUbioru :-
 	podajSport(A),
 	pogodaMozeByc(B),
-	write('wyrokuje z '), write(A), write(' i '), write(B), nl,
-	wyrokujUbior(A,B,C),
-%	write(C),nl,
-	write('wyjasniam '),nl, 
-	wyjasnij(C),
-	fail. 
-
-szukajUbioru.  
+	write('Wybrany sport to '), write(A), write('. Jutro bedzie '), write(B), nl,
+	wyrokujUbior(A, B, C),
+	wyjasnij(C). 
 		
-wyrokujUbior(bieganie, ulewa, przeciwdeszczowa).
+wyrokujUbior(bieganie, kapusniaczek, przeciwdeszczowa).
+wyrokujUbior(bieganie, mzawka , przeciwdeszczowa).
+wyrokujUbior(bieganie, deszcz , przeciwdeszczowa).
+wyrokujUbior(bieganie, snieg , przeciwdeszczowa).
+wyrokujUbior(bieganie, grad, zaniechaj).
+wyrokujUbior(bieganie, silnyWiatr, windstopper).
+wyrokujUbior(bieganie, wichura, windstopper).
+wyrokujUbior(bieganie, bezchmurnie, koszulka).
+wyrokujUbior(bieganie, upalnie, koszulka).
+wyrokujUbior(bieganie, bezchmurnie, koszulka). 
+wyrokujUbior(bieganie, _, bluza).
+
+wyrokujUbior(rower, kapusniaczek, przeciwdeszczowa).
+wyrokujUbior(rower, mzawka , przeciwdeszczowa).
+wyrokujUbior(rower, deszcz , przeciwdeszczowa).
+wyrokujUbior(rower, snieg , zaniechaj).
 wyrokujUbior(rower, grad, zaniechaj).
-wyrokujUbior(hulajnoga, wichura, windstopper).
-wyrokujUbior(rower, snieg, termiczna).
-wyrokujUbior(brak, ulewa, przeciwdeszczowa).
-wyrokujUbior(plywanie, duzaWilgotnosc, koszulka).
-wyrokujUbior(sanki, poludniowy, windstopper).
-wyrokujUbior(pilkaNozna, wysokieCisnienie, bluza).
-wyrokujUbior(bieganie, bezwietrznie, bluza).
-wyrokujUbior(bieganie, upalnie, krotkieSpodenki).
-wyrokujUbior(brak, mzawka, przeciwdeszczowa).
-wyrokujUbior(sanki, mroz, palto).
-wyrokujUbior(rower, niskaWilgotnosc, ocieplana).
+wyrokujUbior(rower, mroz, termiczna).
+wyrokujUbior(rower, silnyWiatr, zaniechaj).
+wyrokujUbior(rower, wichura, zaniechaj).
+wyrokujUbior(rower, bezchmurnie, krotkieSpodenki).
+wyrokujUbior(rower, upalnie, koszulka).
+wyrokujUbior(rower, bezchmurnie, koszulka).
+wyrokujUbior(rower, _, bluza).
+
+wyrokujUbior(plywanie, duzaWilgotnosc, koszulka) :- nl, !.
+wyrokujUbior(plywanie, polnocny, palto) :- nl, !.
+wyrokujUbior(plywanie, niskieCisnienie, przeciwdeszczowa) :- nl, !.
+wyrokujUbior(plywanie, niskaWilgotnosc, krotkieSpodenki) :- nl, !.
+wyrokujUbior(plywanie, _, zaniechaj) :- nl, !.
+
+wyrokujUbior(sanki, poludniowy, windstopper) :- nl, !.
+wyrokujUbior(sanki, deszcz, palto) :- nl, !.
+wyrokujUbior(sanki, silnyWiatr, windstopper) :- nl, !.
+wyrokujUbior(sanki, upalnie, invalid) :- nl, !.
+wyrokujUbior(sanki, _, zaniechaj) :- nl, !.
+
+wyrokujUbior(pilkaNozna, wysokieCisnienie, bluza) :- nl, !.
+wyrokujUbior(pilkaNozna, grad, ocieplana) :- nl, !.
+wyrokujUbior(pilkaNozna, snieg, bluza) :- nl, !.
+wyrokujUbior(pilkaNozna, calkowiteZachmurzenie, palto) :- nl, !.
+wyrokujUbior(pilkaNozna, _, zaniechaj) :- nl, !.
+
 wyrokujUbior(_, _, invalid).
 
-
 wyjasnij(przeciwdeszczowa) :-
-	write('przeciwdeszczowa'),nl, !. 
+	write('Najlepiej ubrac kurtke przeciwdeszczowa'),nl, !. 
 
 wyjasnij(zaniechaj) :-
-	write('zaniechaj'),nl, !. 
+	write('Sugerowalbym zaniechac wszelkich sportow'),nl, !. 
 
 wyjasnij(windstopper) :-
-	write('windstopper'),nl, !. 
+	write('Najlepszym wyjsciem jest przygotowac sobie windstopper'),nl, !. 
 
 wyjasnij(termiczna) :-
-	write('termiczna'),nl, !. 
+	write('Bielizna termiczna bedzie najlepszym wyjsciem'),nl, !. 
 
 wyjasnij(bluza) :-
-	write('bluza'),nl, !. 
+	write('Bluza to to, co potrzebujesz'),nl, !. 
 
 wyjasnij(koszulka) :-
-	write('koszulka'),nl, !. 
-
+	write('Najlepiej wybrac zwykla koszulke'),nl, !. 
 
 wyjasnij(krotkieSpodenki) :-
-	write('krotkieSpodenki'),nl, !. 
+	write('Dobrym wyjsciem byloby przygotowac sobie krotkie spodenki'),nl, !. 
 
 wyjasnij(palto) :-
-	write('palto'),nl, !. 
+	write('Czas wyciagnac z szafy palto'),nl, !. 
 
 wyjasnij(ocieplana) :-
-	write('ocieplana'),nl, !. 
+	write('Bluza ocieplana bardzo sie przyda'),nl, !. 
 
 wyjasnij(invalid) :-
-	write('nie moge przewidziec'),nl, !. 
+	write('Nie moge przewidziec co powinienes wybrac'),nl, !. 
 
 %useful
 
@@ -75,10 +98,6 @@ pogodaMozeByc(ulewa) :-
 pogodaMozeByc(grad) :- 
 	uzytkownikPowiedzial(poraRoku, jesien),
 	uzytkownikPowiedzial(naslonecznienie, calkowiteZachmurzenie), !.
-							   
-pogodaMozeByc(wichura) :- 
-	uzytkownikPowiedzial(silaWiatru, wichura),
-	uzytkownikPowiedzial(naslonecznienie, lekkieZachmurzenie), !.
 	
 pogodaMozeByc(snieg) :- 
 	uzytkownikPowiedzial(poraRoku, zima),
@@ -97,7 +116,7 @@ pogodaMozeByc(poludniowy) :-
 	uzytkownikPowiedzial(temperatura, umiarkowanieCieplo), !.
 	
 pogodaMozeByc(wysokieCisnienie) :- 
-	uzytkownikPowiedzial(cisnienie, normalmneCisnienie),
+	uzytkownikPowiedzial(cisnienie, normalneCisnienie),
 	uzytkownikPowiedzial(temperatura, mroz), !.
 
 pogodaMozeByc(bezwietrznie) :- 
@@ -107,14 +126,6 @@ pogodaMozeByc(bezwietrznie) :-
 pogodaMozeByc(upalnie) :- 
 	uzytkownikPowiedzial(temperatura, umiarkowanieCieplo),
 	uzytkownikPowiedzial(kierunekWiatru, poludniowy), !.
-	
-pogodaMozeByc(mzawka) :- 
-	uzytkownikPowiedzial(opady, brakOpadow),
-	uzytkownikPowiedzial(naslonecznienie, slonecznie), !.
-	
-pogodaMozeByc(niskaWilgotnosc) :- 
-	uzytkownikPowiedzial(poraRoku, zima),
-	uzytkownikPowiedzial(silaWiatru, wichura), !.
 
 % WIATR
 
@@ -371,126 +382,76 @@ wykasujZapamietaneOdpowiedzi.
 
 
 podajSport(A) :- 
-		zapytaj(sport, A),
+		zapytajSport(sport, A),
 		write(A).
 		
 					    
-uzytkownikPowiedzial(Q,A) :- zapamietaneOdpowiedzi(Q,A), !.%, write('pamietam'), nl, !.
+uzytkownikPowiedzial(Q,A) :- zapamietaneOdpowiedzi(Q,A), !.
 
 uzytkownikPowiedzial(Q,A) :- \+ zapamietaneOdpowiedzi(Q,_),
                   nl,nl,
-                  zapytaj(Q, A), 
-%                  write('nie pamietam '),
-%                  write(A),   
-                  Odpowiedz = A,
-                  asserta(zapamietaneOdpowiedzi(Q,Odpowiedz)). 
+                  zapytaj(Q, A). 
                   
 		
-zapytaj(sport, A) :-
-	write('Podaj sport'),
+zapytajSport(sport, A) :-
+	write('Podaj sport, dostepne wartosci to: bieganie, pilkaNozna, rower, sanki, plywanie'),
 	nl,nl,
-	read(B),
-	jakiSport(B, A).
+	read(A),
+	asserta(zapamietaneOdpowiedzi(sport,A)).
 	
 zapytaj(silaWiatru, A) :-
-	write('Podaj jaka jest sila wiatru'),
+	write('Podaj jaka jest sila wiatru, dostepne wartosci to: bezwietrznie, lekkiWiatr, silnyWiatr, wichura'),
 	nl,nl,
 	read(B),
-	jakaSilaWiatru(B,A).
+	asserta(zapamietaneOdpowiedzi(silaWiatru,B)),
+	A = B.
 	
-zapytaj(naslonecznienie, A) :-
-	write('Podaj jakie jest naslonecznienie'),
+zapytaj(naslonecznienie, A) :- 
+	write('Podaj jakie jest naslonecznienie, dostepne wartosci to: bezchmurnie, lekkieZachmurzenie, calkowiteZachmurzenie'),
 	nl,nl,
 	read(B),
-	jakieNaslonecznienie(B,A).     	
+	asserta(zapamietaneOdpowiedzi(naslonecznienie,B)),
+	A = B.   	
 	
 zapytaj(poraRoku, A) :-
-	write('Podaj jaka jest pora roku'),
+	write('Podaj jaka jest pora roku, dostepne wartosci to: wiosna, lato, jesien, zima'),
 	nl,nl,
 	read(B),
-	jakaPoraRoku(B,A).
+	asserta(zapamietaneOdpowiedzi(poraRoku,B)),
+	A = B.
 	
 zapytaj(temperatura, A) :-
-	write('Podaj jaka jest temperatura'),
+	write('Podaj jaka jest temperatura, dostepne wartosci to: mroz, przymrozek, umiarkowanieCieplo, upalnie'),
 	nl,nl,
 	read(B),
-	jakaTemperatura(B,A).	
+	asserta(zapamietaneOdpowiedzi(temperatura,B)),
+	A = B.	
 	
 zapytaj(cisnienie, A) :-
-	write('Podaj jakie jest cisnienie'),
+	write('Podaj jakie jest cisnienie, dostepne wartosci to: niskieCisnienie, normalneCisnienie, wysokieCisnienie'),
 	nl,nl,
 	read(B),
-	jakieCisnienie(B,A).	
+	asserta(zapamietaneOdpowiedzi(cisnienie,B)),
+	A = B.
 	
 zapytaj(kierunekWiatru, A) :-
-	write('Podaj jaki jest kierunek wiatru'),
+	write('Podaj jaki jest kierunek wiatru, dostepne wartosci to: poludniowy, polnocny, zachodni, wschodni'),
 	nl,nl,
 	read(B),
-	jakiKierunekWiatru(B,A).
+	asserta(zapamietaneOdpowiedzi(kierunekWiatru,B)),
+	A = B.
 	
 zapytaj(opady, A) :-
-	write('Podaj jakie s� opady'),
+	write('Podaj jakie sa opady, dostepne wartosci to: brakOpadow, mzawka, kapusniaczek, desz, ulewa, grad, snieg'),
 	nl,nl,
 	read(B),
-	jakieOpady(B,A).	
+	asserta(zapamietaneOdpowiedzi(opady,B)),
+	A = B.
 	
 zapytaj(wilgotnosc, A) :-
-	write('Podaj jaka jest wilgotnosc'),
+	write('Podaj jaka jest wilgotnosc, dostepne wartosci to: niskaWilgotnosc, normalnaWilgotnosc, duzaWilgotnosc'),
 	nl,nl, 
 	read(B),
-	jakaWilgotnosc(B, A).
-					 
-					 
-opisz(bezwietrznie) :-
-	nl,
-	write('Bedzie bezwietrznie.'),nl.
-	
-jakaWilgotnosc(niska, niska) :- nl, !.	
-jakaWilgotnosc(duza, duza) :- nl, !.
-jakaWilgotnosc(_, normalna) :- nl, !.
-	
-jakiSport(bieganie, bieganie) :- nl, !.
-jakiSport(rower, rower) :- nl, !.
-jakiSport(hulajnoga, hulajnoga) :- nl, !.
-jakiSport(plywanie, plywanie) :- nl, !.
-jakiSport(sanki, sanki) :- nl, !.
-jakiSport(pilkaNozna, pilkaNozna) :- nl, !.
-jakiSport(_, brak) :- nl, !.
-
-jakaSilaWiatru(lekkiWiatr, lekkiWiatr) :- nl, !.
-jakaSilaWiatru(silnyWiatr, silnyWiatr) :- nl, !.
-jakaSilaWiatru(wichura, wichura) :- nl, !.
-jakaSilaWiatru(_, bezwietrznie) :- nl, !.
-
-jakieNaslonecznienie(lekkieZachmurzenie,lekkieZachmurzenie) :- nl, !.
-jakieNaslonecznienie(calkowiteZachmurzenie,calkowiteZachmurzenie) :- nl, !.
-jakieNaslonecznienie(_,bezchmurnie) :- nl, !.
-
-jakaPoraRoku(wiosna,wiosna) :- nl, !.
-jakaPoraRoku(jesien,jesien) :- nl, !. 
-jakaPoraRoku(zima,zima) :- nl, !.
-jakaPoraRoku(_,lato) :- nl, !.
-
-jakaTemperatura(mroz,mroz) :- nl, !.
-jakaTemperatura(przymrozek,przymrozek) :- nl, !.
-jakaTemperatura(upalnie,upalnie) :- nl, !.
-jakaTemperatura(_,umiarkowanieCieplo) :- nl, !.
-
-jakieCisnienie(niskieCisnienie,niskieCisnienie) :- nl, !.
-jakieCisnienie(wysokieCisnienie,wysokieCisnienie) :- nl, !.
-jakieCisnienie(_,normalneCisnienie) :- nl, !.
-
-jakiKierunekWiatru(wschodni,wschodni) :- nl, !.
-jakiKierunekWiatru(zachodni,zachodni) :- nl, !.
-jakiKierunekWiatru(poludniowy,poludniowy) :- nl, !.
-jakiKierunekWiatru(polnocny,polnocny) :- nl, !.
-jakiKierunekWiatru(_,brak) :- nl, !.
-
-jakieOpady(kapusniaczek,kapusniaczek) :- nl, !.
-jakieOpady(ulewa,ulewa) :- nl, !.
-jakieOpady(grad,grad) :- nl, !.
-jakieOpady(deszcz,deszcz) :- nl, !.
-jakieOpady(mzawka,mzawka) :- nl, !.
-jakieOpady(_ ,brakOpadow) :- nl, !.
-
-
+	asserta(zapamietaneOdpowiedzi(wilgotnosc,B)),
+	A = B.
+				
