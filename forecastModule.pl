@@ -49,13 +49,13 @@ wyrokujUbior(sanki, poludniowy, windstopper) :- nl, !.
 wyrokujUbior(sanki, deszcz, palto) :- nl, !.
 wyrokujUbior(sanki, silnyWiatr, windstopper) :- nl, !.
 wyrokujUbior(sanki, upalnie, invalid) :- nl, !.
-wyrokujUbior(sanki, _, zaniechaj) :- nl, !.
+wyrokujUbior(sanki, _, ocieplana) :- nl, !.
 
 wyrokujUbior(pilkaNozna, wysokieCisnienie, bluza) :- nl, !.
 wyrokujUbior(pilkaNozna, grad, ocieplana) :- nl, !.
 wyrokujUbior(pilkaNozna, snieg, bluza) :- nl, !.
 wyrokujUbior(pilkaNozna, calkowiteZachmurzenie, palto) :- nl, !.
-wyrokujUbior(pilkaNozna, _, zaniechaj) :- nl, !.
+wyrokujUbior(pilkaNozna, _, krotkieSpodenki) :- nl, !.
 
 wyrokujUbior(_, _, invalid).
 
